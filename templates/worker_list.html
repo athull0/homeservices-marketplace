@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block links %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/worker_list.css' %}">
+{%endblock%}
+{%block contents%}
+
+<div class="container py-5">
+    
+    <h1 class="text-center mb-4">Workers in {{ category.name }}</h1>
+    <div class="row">
+      {% for worker in workers %}
+      <div class="col-lg-4 col-md-6 col-sm-12 mb-4 d-flex">
+
+          <div class="card h-100">
+            <img src="{{ worker.profilepicture.url }}" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">{{ worker.user.username }}</h5>
+              <p class="card-text">Job: {{ worker.job_title }}</p>
+              <p class="card-text">Skills: {{ worker.skills }}</p>
+              <p class="card-text">Categories: 
+              {% for category in worker.categories.all %}
+                {{ category.name }}{% if not forloop.last %}, {% endif %}
+              {%endfor%}
+              </p>
+              <div class="profileview">
+                 <a href="{% url 'workerdetails' worker.id %}" class="btn btn-primary">View Profile</a>
+              </div>
+             
+            </div>
+          </div>
+      </div>
+      {% endfor%}  
+    </div>
+    
+    
+      
+    
+</div>
+
+{% endblock %}

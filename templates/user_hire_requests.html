@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block links %}
+{% load static %}
+<link  rel="stylesheet" href="{% static 'css/user_hire_request.css' %}">
+{% endblock %}
+{% block contents %}
+
+<h2>Requests status</h2>
+<div class="hire-requests-container">
+    
+    {% for request in user_requests %}
+    <div class="requests">
+        <p>Worker: {{  request.worker.user.username  }}</p>
+        <p>Status: {{ request.status }}</p>
+        {% if request.message %}
+            <p><strong>Message:</strong> {{ request.message }}</p>
+        {% endif %}
+        
+        <hr>
+        <a href="{% url 'workerdetails' request.worker.id %}"><button class="btn btn-primary">View Profile</button></a>    
+    </div> 
+    {% endfor %}
+    <div class="collapse " id="moreRequests">
+    {% for request in user_requests|slice:"7:" %}
+        <div class="requests">
+            <p><strong>Worker:</strong> {{ request.worker.user.username }}</p>
+            <p><strong>Status:</strong> {{ request.status }}</p>
+            <p><strong>Message:</strong> {{ request.message }}</p>
+            <hr>
+            <a href="{% url 'workerdetails' request.worker.id %}"><button class="btn btn-primary">View Profile</button></a>    
+            
+        </div>
+    {% endfor %}
+</div>
+</div>
+
+<button class="btn btn-secondary" data-bs-toggle="collapse" data-bs-target="#moreRequests">
+    Load More
+</button>
+    
+
+{% endblock %}

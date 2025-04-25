@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block links %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/worker_request.css' %}">
+{% endblock %}
+{% block contents %}
+<h2>Pending Hire Requests</h2>
+<div class="worker-request-container">
+   {% if hire_requests %}
+        {% for hire_request in hire_requests %}
+        <div class="request_box">
+            <p><strong>User Name:</strong> {{ hire_request.user.username }}</p>
+            <p><strong>Location:</strong> {{ hire_request.user_profile.address }}</p>
+            <p><strong>Contact:</strong> {{ hire_request.user_profile.contact }}</p>
+            <p><strong>Status:</strong> {{ hire_request.status }}</p>
+            <form action="{% url 'respond_hire_request' hire_request.id %}" method="POST">
+            {% csrf_token %}
+            <button type="submit" name="response" value="accepted" class="btn btn-success">Accept</button>
+            <button type="submit" name="response" value="rejected" class="btn btn-danger">Reject</button>
+            </form>  
+        </div>
+        
+        {% endfor %}
+    {% else %}
+        <p>No pending requests.</p>
+    {% endif %} 
+</div>
+
+{% endblock %}
+

@@ -1,0 +1,87 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  {% load static %}
+    {% if request.user.is_authenticated and request.user.worker_profile %}
+      <a href="{% url 'workerhome' %}"><img class="logo" src="{% static 'images/logo3.PNG' %}" style="height:min-content;"></a>
+    {% else %}
+      <a class="navbar-brand" href=" {% url 'home' %} "><img class="logo" src="{% static 'images/logo3.PNG' %}" style="height:min-content;"></a>
+    {%endif%}
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+    
+      <div class="searchbar">
+        <form method="get" action="{% url 'search_workers' %}" class="form-inline my-2 my-lg-0 search-bar" style="display: flex; width: 100%; max-width: 400px; flex: 1 1 auto;">
+        <input class=" mr-sm-2" type="text"  name="q" placeholder="Search" value="{{search_query}}">
+        <button  type="submit"><span class="material-symbols-outlined">
+            search
+            </span></button>
+        </form>
+      </div>
+      
+      <div class="authlinks">
+        <div class="icons">
+        {% if user.userprofile%}
+        <a href="{% url 'wishlist' %}"><span class="material-symbols-outlined">
+          favorite
+          </span></a>
+        {%endif%}
+          <a href="{% url 'allmessages' %}">
+            <span class="material-symbols-outlined">
+            mail
+          </span>
+          </a>
+          
+          <a href="{% url 'hireresponse' %}">
+            <span class="material-symbols-outlined">
+            notifications
+            </span>
+          </a> 
+          
+        </div>
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0" style="gap: 20px; display:flex; justify-content:center; align-items:center;">
+        <div class="gotoprofile">
+          {% if user.is_authenticated %}
+          
+          <button class=" profile-button">
+            {% if user.userprofile.profilepicture %} 
+            <img class="profilepic" src="{{user.userprofile.profilepicture.url}}">
+            {%elif user.worker_profile.profilepicture%}
+            <img class="profilepic" src="{{user.worker_profile.profilepicture.url}}">
+
+            {%else%}
+            <span class="material-symbols-outlined">
+              account_circle
+            </span>
+            {%endif%}
+            {% if user.worker_profile %}
+              <a href="{% url 'weditprofile' %}" style="text-decoration: none; margin-top:15px;"><p>{{request.user}}</p></a> 
+            {%elif user.userprofile%}
+              <a href="{% url 'editprofile' %}" style="text-decoration: none; margin-top:15px;"><p>{{request.user}}</p></a> 
+            {%endif%}
+          </button>
+            
+        </div>
+        
+        <li class="nav-item">
+          <a class="logout nav-link" href="{% url 'logout' %}">Logout</a>
+        </li>
+
+        {% else %}
+        <li class="nav-item active">
+          <a class="signup nav-link" href="{% url 'register' %}">Sign up </a>
+        </li>
+        <li class="nav-item">
+          <a class="login nav-link" href="{% url 'loginpage' %}">Login</a>
+        </li>
+        
+        
+        {% endif %}
+        </ul>
+       </div>
+
+
+      
+    </div>
+  </nav>

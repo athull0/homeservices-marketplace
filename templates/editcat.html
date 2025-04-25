@@ -1,0 +1,28 @@
+{% extends 'dashboard.html' %}
+
+{% block links %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/editcat.css' %}">
+{% endblock %}
+{% block contents %}
+<form id="editcatform" method="post" enctype="multipart/form-data" class="form-container">
+    {% csrf_token %}
+
+    <div class="form-group">
+        <label for="name">Category Name</label>
+        <input type="text" id="name" name="name" value="{{ form.name.value }}" required>
+    </div>
+
+    <div class="form-group">
+        <label for="details">Details</label>
+        <input type="text" id="details" name="details" value="{{ form.details.value }}" required>
+    </div>
+
+    <div class="form-group">
+        <label for="image">Change Image</label>
+        <input type="file" id="image" name="image">
+    </div>
+
+    <button type="submit" class="btn-submit">Update</button>
+</form>
+{% endblock %}

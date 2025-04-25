@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block links %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
+
+{% block contents %}
+<div class="main">
+    <div class="header">
+        {% if messages %}
+        <ul class="messages">
+         {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+        </ul>
+        {% endif %}
+        {% if user.is_authenticated %}
+        {%if user.worker_profile.is_approved%}
+        <h3>Congrats you are Verified!</h3>
+        {% else%}
+        <h3>Your Account is under verification stay tuned!</h3>
+        
+        {%endif%}
+        <h1 id="welcomemessage" style="font-size: 50px; font-weight:1000; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin-bottom:10px; color:rgb(127, 154, 209);">Welcome {{user.username}}</h1>
+        {%endif%}
+        <p style="font-size: 50px; font-weight:1000; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Get hired.<br> Get paid.<br> Grow your business!<p>
+        <!-- <p style="font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; font-size: 20px; font-weight:400;;">Welcome to a complete solution for all your home related problems!</p> -->
+        
+        {% if not user.is_authenticated %}
+        <button class="loginnow" data-bs-toggle="modal" data-bs-target="#loginmodal">Login now</button>
+        {% endif %}
+    </div>
+    <div class="achievements">
+        <p>1000+<br>works done!</p>
+        <p>100+<br>workers</p>
+        <p>4.9<br>overall ratings</p>
+    </div>
+    <div class="jobsandcontacts">
+        <div class="job">
+           <a href="{% url 'worker_requests' %}">
+            <img class="jobsicon" src="/static/images/jobsicon3.webp">
+            <h1>Jobs</h1>
+            {% if pending_requests_count > 0 %}
+                <span class="badge bg-danger">{{ pending_requests_count }}</span>
+            {% endif %}
+          </a>  
+        </div>
+        <div class="profilew">
+            <a href="{% url 'weditprofile'%}">
+                <img src="/static/images/profilew.webp">
+                <h1> Profile</h1>
+            </a>
+        </div>
+        <div class="jobmsg">
+           <a href="#">
+            <img class="jobmessage" src="/static/images/message2.webp">
+            <h1>Messages</h1>
+            </a> 
+        </div>
+        
+    </div>
+    
+    
+    
+    
+        
+    
+    
+</div>
+<script src="{% static 'js/home.js'%}"></script>
+{% endblock %}

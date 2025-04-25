@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block links %}
+{% load static %}
+<link rel="stylesheet" href="{%  static 'css/userprofile.css' %}">
+{% endblock %}
+
+{% block contents %}
+
+<div class="main">
+    <div class="header">
+      <h2 id="welocomemessage">Welcome,{{pro.user.username}}</h2>  
+    </div>
+    
+    <div class="contents">
+        <div class="profilepicture">
+        {% if pro.profilepicture %}
+        <img class="profile_pic" src="/user/{{pro.profilepicture}}">
+        {% else %}
+        <span class="material-symbols-outlined">
+            face
+        </span>
+        {%endif%}
+        </div>
+        <div class="details">
+    {% if pro.job_title %}
+    <p>job_title:{{pro.job_title}}</p>
+    {% endif %}
+    {% if pro.skills %}
+    <p>skills:{{pro.skills}}</p>
+    {%endif%}
+    {% if pro.contact %}
+    <p>contact:{{pro.contact}}</p>
+    {%if pro.categories %}
+    <p>categories:{{pro.categories}}</p>
+    {%endif%}
+    {%endif%}
+    <label for="availability-checkbox">Available:</label>
+    <input type="checkbox" id="availability-checkbox" {% if user.availability %}checked{% endif %}>
+        </div>
+    </div>
+   
+    
+   
+    <a href="{% url 'weditprofile' pro.id %}"><button>EditProfile</button></a> 
+<script src="{% static 'js/workerpofile.js' %}"></script>
+</div>
+{% endblock %}

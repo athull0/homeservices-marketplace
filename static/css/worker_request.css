@@ -1,0 +1,89 @@
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+/* Container */
+.worker-request-container {
+    max-width: 600px;
+    margin: 40px auto;
+    /* background: #fff; */
+    padding: 20px;
+    /* border-radius: 10px; */
+    /* box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); */
+}
+.request_box {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px; 
+    transition: transform 0.6s ease-in-out;
+
+}
+.request_box:hover{
+    transform: translateY(-5px);
+}
+
+  
+/* Heading */
+h2 {
+    text-align: center;
+    color: #333;
+}
+
+
+.worker-request-container p {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 8px;
+}
+
+
+form {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+.worker-request-container button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.875em;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn-success {
+    background-color: #28a745;
+    color: white;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    color: white;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+}
+
+
+.worker-request-container p:last-child {
+    text-align: center;
+    color: #888;
+}
+h2{
+    font-size: 2vw;
+}

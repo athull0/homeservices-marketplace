@@ -1,0 +1,347 @@
+/* .container {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+
+}
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #f8f9fa;
+    font-family: 'Arial', sans-serif;
+}
+.header{
+    background-image: url('/static/images/backgroundsignup2.webp');
+    border-radius: 10px;
+    border: 1px solid black;
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat;
+    width: 100%;
+    max-height: 400px;
+    min-height: 300px;
+    height: 50vh; 
+    display: flex;
+    flex-direction: column;
+    color: white;
+    position: relative;
+}
+.card {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    
+    justify-content: center;
+    width: 80%;
+    top: -100px;
+}
+
+.card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+    
+}
+.card-body {
+    padding: 20px;
+}
+.card-title {
+    font-weight: 600;
+    color: #333;
+}
+.card-text {
+    color: #666;
+}
+.contact{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    justify-content: center;
+    align-items: center;
+    
+   
+    position: absolute;
+    bottom: 50%; 
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: auto;
+    
+    
+}
+ */
+/* General Styling */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+}
+
+/* Container */
+.worker-detail-container {
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Header */
+.header h1 {
+    text-align: center;
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+
+.card {
+    border: none;
+    overflow: hidden;
+    width: 100%;
+    
+}
+
+.card img {
+    width: 100%;
+    height: auto;
+    max-width: 200px;
+    display: block;
+    margin: 0 auto;
+    border-radius: 50%;
+}
+
+
+.card-body {
+    padding: 20px;
+}
+
+.card-body p {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 8px;
+}
+
+
+.contact, .ratings {
+    text-align: center;
+    margin-top: 15px;
+}
+.contact{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    justify-content: center;
+}
+.btn {
+    padding: 10px 16px;
+    font-size: 14px;
+    border-radius: 8px;
+    transition: 0.3s ease-in-out;
+}
+.contactbtn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.contactbtn a{
+    text-decoration: none;
+    color: black;
+}
+.btn-primary {
+    background-color: #007bff;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    border: none;
+}
+
+.btn-secondary:hover {
+    background-color: #545b62;
+}
+
+
+@media (max-width: 768px) {
+    .card {
+        flex-direction: column;
+    }
+    
+    .card img {
+        max-width: 150px;
+    }
+    .contact{
+        flex-direction: column;
+    }
+}
+.feedback-section {
+    margin-top: 30px;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.feedback {
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+}
+
+.feedback:last-child {
+    border-bottom: none;
+}
+.rating-stars {
+    display: flex;
+    flex-direction: row-reverse; /* Makes the highest value appear first */
+    justify-content: start;
+}
+
+.rating-stars input {
+    display: none; /* Hide default radio buttons */
+}
+
+.rating-stars label {
+    font-size: 30px;
+    color: gray;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.rating-stars input:checked ~ label {
+    color: gold; /* Highlight the selected star */
+}
+
+/* Make all previous stars gold when hovering */
+.rating-stars label:hover,
+.rating-stars label:hover ~ label {
+    color: gold;
+}
+.submitted-rating {
+    font-size: 25px;
+    color: gold;
+}
+
+.filled-star {
+    color: gold;
+}
+
+.empty-star {
+    color: gray;
+}
+.rating-stars input[type="radio"] {
+    appearance: none;  
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+.redeem-form {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    max-width: 400px;
+    margin-top: 20px;
+}
+
+.checkbox-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+    font-size: 16px;
+    color: #333;
+}
+
+.reward-input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 20px;
+}
+
+.reward-input-group label {
+    font-weight: 500;
+    font-size: 15px;
+    color: #555;
+}
+
+.reward-input-group input {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    transition: border-color 0.3s;
+    font-size: 15px;
+}
+
+.reward-input-group input:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.modern-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: background-color 0.3s;
+}
+
+.modern-btn:hover {
+    background-color: #0056b3;
+}
+.wishlist:hover{
+    color: red;
+}
+
+
+.icon-btn{
+    padding: 15px;
+    border: none;
+    background: none;
+}
+.verified-badge {
+    display: inline-flex;
+    align-items: center;
+    background-color: #e0f3ff;
+    color: #007bff;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-left: 10px;
+  }
+  
+  .verified-badge .material-symbols-outlined {
+    font-size: 18px;
+    margin-right: 4px;
+  }
+  

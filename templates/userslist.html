@@ -1,0 +1,35 @@
+{% extends 'dashboard.html' %}
+{% block links %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/userslist.css' %}">
+{% endblock %}
+
+{% block contents %}
+<h1>Users</h1>
+<hr>
+<div class="users-container">
+    <div class="searchbar">
+        <form method="get" action="{% url 'search_users' %}" class="form-inline my-2 my-lg-0 search-bar" style="display: flex; min-width:400px; width:100%;">
+        <input class=" mr-sm-2" type="text"  name="q" placeholder="Search Users" value="{{search_query}}">
+        <button  type="submit"><span class="material-symbols-outlined">
+            search
+            </span></button>
+        </form>
+      </div>
+    {% for normaluser in users %}
+    <div class="users">
+       
+        <p>Name:{{normaluser.user.username}}</p>
+        <p>Address:{{normaluser.address}}</p>
+        <p>Contact:{{normaluser.contact}}</p>
+        <p>Id:{{normaluser.user.id}}</p>
+        <div class="delete">
+            <a href="{% url 'userdelete' normaluser.user.id %}"><button class="btn btn-danger">Remove</button></a>
+        </div>
+        
+    </div>
+    {% endfor %}
+</div>
+
+
+{% endblock %}

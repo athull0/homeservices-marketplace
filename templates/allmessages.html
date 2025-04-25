@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block links %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/allmessages.css' %}">
+{% endblock %}
+
+{% block contents %}
+<div class="messages-container">
+    {% for message in messages %}
+    <div class="messagebox">
+        
+
+        <p>Message from:{{message.sender}}</p>
+        <p>{{message.timestamp}}</p>
+        <a href="{% url 'chat_page' message.sender.id %}"><button class="btn btn-primary">Check the message</button></a>
+        
+
+    </div>
+    {% endfor %}
+</div>
+{%endblock%}

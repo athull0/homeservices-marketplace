@@ -1,0 +1,31 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.hire-requests-container{
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+.requests{
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px; 
+    
+}
+.hire-requests-container p{
+    font-size: 1rem;
+    color: #555;
+
+}
+.hire-requests-container h2{
+    font-size: 3rem;
+    
+    text-align: center;
+}

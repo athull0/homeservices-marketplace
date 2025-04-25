@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{%block links%}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/editprofile.css' %}">
+{%endblock%}
+{% block contents %}
+
+<div class="header">
+    
+        <h3 class="heading">User Profile</h3>
+    
+    <h1 id="welcomemessage">Hello {{user.username}}</h1>
+    <p class="welcome" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Welcome to your Profile, Update and make yourself impressive!</p>
+</div>
+<div class="container">
+    
+        <div class="profileform">
+           <form method="post" enctype="multipart/form-data" class="p-4 shadow rounded bg-white">
+                {% csrf_token %}
+                <div class="form-floating mb-3">
+                    {{form.username}}
+                    <label for="id_username">Username</label>
+                    <small class="text-danger">{{ form.username.errors|first }}</small>
+
+                </div>
+                <!-- Address Field -->
+                <div class="form-floating mb-3">
+                    {{ form.address }}
+                    <label for="id_address">Address</label>
+                    <small class="text-danger">{{ form.address.errors|first }}</small>
+                </div>
+
+                <!-- Profile Picture Upload -->
+                <div class="mb-3">
+                    <label for="id_profilepicture" class="form-label">Profile Picture</label>
+                    {{ form.profilepicture }}
+                    <small class="text-danger">{{ form.profilepicture.errors|first }}</small>
+                </div>
+                
+
+                <!-- Contact Number -->
+                <div class="form-floating mb-3">
+                    {{ form.contact }}
+                    <label for="id_contact">Contact</label>
+                    <small class="text-danger">{{ form.contact.errors|first }}</small>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="btn btn-primary w-100 py-2">Save Changes</button>
+            </form> 
+        </div>
+            
+        <div class="profilesection">
+            <div class="profilepicture">
+                {% if user.userprofile.profilepicture %}
+                <img class="profile_picture" src="{{user.userprofile.profilepicture.url}}">
+                {%else%}
+                <img src="https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg" style="width:100%; height:100%; object-fit: contain;">
+                {% endif %}
+            </div>
+            <div class="profile_info">
+                <p>{{user.username}}</p>
+                <p>{{user.email}}</p>
+                <p>{{user.userprofile.contact}}</p>
+                <p>Available Reward Points: {{user.userprofile.reward_points}}</p>
+    
+            </div>
+            <div class="buttons">
+                <button class="btn btn-secondary w-100%">Messages</button>
+                <a href="{% url 'hireresponse' %}"><button class="btn btn-primary">Requests</button></a>  
+            </div>
+        </div>
+</div>
+
+
+{% endblock %}

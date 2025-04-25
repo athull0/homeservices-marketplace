@@ -1,0 +1,25 @@
+{% extends 'dashboard.html' %}
+{% block links %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/categories.css' %}">
+{% endblock %}
+
+{% block contents %}
+<h1 class="heading">Manage Categories</h1>
+<div class="category-container">
+  {% for category in categories %}
+    <div class="category">
+        <h1>{{category.name}}</h1>
+        <p>{{category.details}}</p>
+        <hr>
+        <div class="buttons">
+            <a href="{% url 'editcategory' category.id%}"><button class="btn btn-primary">Edit</button></a>
+            <a href="{% url 'catdel' category.id %}"><button class="btn btn-danger">Delete</button></a>       
+        </div>
+  
+    </div>
+    {% endfor%} 
+ 
+</div>
+
+{% endblock %}

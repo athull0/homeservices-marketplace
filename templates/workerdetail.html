@@ -1,0 +1,236 @@
+
+
+
+
+
+
+{% extends 'base.html' %}
+{% block links %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/workerdetail.css' %}">
+{% endblock %}
+
+{% block contents %}
+<div class="worker-detail-container">
+  <div class="header">
+    <h1> 
+        
+    {{worker.user.username}}
+    {%if worker.points >= 1 %}
+    <span class="verified-badge">
+      <span class="material-symbols-outlined">
+        check_circle
+        </span>
+        Verified  
+    </span>
+    
+        {%endif%}
+    </h1>
+    
+     
+    
+
+  </div>
+    <div class="card mb-3" >
+        <div class="row g-0">
+          <div class="col-md-4 align-items-center">
+            <img src="{{ worker.profilepicture.url }}" class="img-fluid" alt="Profile Picture">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+                
+                
+
+               <div class="contact">
+                    {% if hire_request %}
+                        {% if hire_request.completed %}
+            
+                        <form action="{% url 'send_hire_request' worker.id %}" method="post" class="redeem-form">
+                            {% csrf_token %}
+                        
+                            <div class="checkbox-row">
+                                <input type="checkbox" id="use_rewards" onchange="toggleRewardInput(this)">
+                                <label for="use_rewards">Use Reward Points</label>
+                            </div>
+                        
+                            <div class="reward-input-group" id="reward_input_group" style="display: none;">
+                                <label for="points_to_use">Reward Points</label>
+                                <input type="number" name="points_to_use" id="points_to_use"
+                                       min="0" max="{{ user_profile.reward_points }}" placeholder="Enter points to redeem">
+                            </div>
+                        
+                            <button type="submit" class="modern-btn">
+                                Hire <span class="material-symbols-outlined">check_small</span>
+                            </button>
+                        </form>
+                        
+                        
+                        
+                        {% else %}
+                            {% if hire_request.status == "pending" %}
+                                <button disabled class="btn btn-warning waiting-btn"><span>Waiting for Response </span><span class="icon">⏳</span></button>
+                                <a href="{% url 'cancel_hire_request' hire_request.id %}" class="btn btn-danger">Cancel Hire</a>
+                            {% elif hire_request.status == "accepted" %}
+                                <button disabled class="btn btn-success">Hired ✅</button>
+                                <a href="{% url 'mark_completed' hire_request.id %}" class="btn btn-warning">Mark as Completed</a>
+                            {% elif hire_request.status == "rejected" %}
+                                <button class="btn btn-danger">Rejected</button>
+                                <form action="{% url 'send_hire_request' worker.id %}" method="post">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-primary">ReHire<span class="material-symbols-outlined">
+                                check_small
+                                </span></button> 
+                                </form>
+                        
+                        {% endif %}
+                    {% endif %}
+                {% else %}
+                <form action="{% url 'send_hire_request' worker.id %}" method="post" class="redeem-form">
+                    {% csrf_token %}
+                
+                    <div class="checkbox-row">
+                        <input type="checkbox" id="use_rewards" onchange="toggleRewardInput(this)">
+                        <label for="use_rewards">Use Reward Points</label>
+                    </div>
+                
+                    <div class="reward-input-group" id="reward_input_group" style="display: none;">
+                        <label for="points_to_use">Reward Points</label>
+                        <input type="number" name="points_to_use" id="points_to_use"
+                               min="0" max="{{ user_profile.reward_points }}" placeholder="Enter points to redeem">
+                    </div>
+                
+                    <button type="submit" class="modern-btn">
+                        Hire <span class="material-symbols-outlined">check_small</span>
+                    </button>
+                </form>
+                
+                
+                
+                
+                
+                {% endif %}
+                
+                    
+
+                
+
+
+            
+             
+                <a href="{% url 'chat_page' worker.user.id %}" style="text-decoration: none;"><button class="btn btn-secondary contactbtn">Contact<span class="material-symbols-outlined">
+              chat_bubble
+              </span></button></a>
+              {% if not wishlist %}
+              <form method="post" action="{%url 'addtowishlist' worker.id%}">
+                {%csrf_token%}
+                <button class="icon-btn">
+                    <i class="fa-regular fa-heart" style="color: grey; font-size: 1.5vw"></i>
+                  </button>
+                
+              </form>
+              {% elif wishlist %}
+              <form method="post" action="{%url 'removefromwishlist' worker.id%}">
+                {%csrf_token%}
+                <button class="icon-btn">
+                    <i class="fa-solid fa-heart" style="color: red; font-size : 1.5vw;"></i>
+                  </button>
+                  
+                
+              </form>
+              
+              {%endif%}
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    
+       
+     
+
+    
+    
+<p>Job Title:{{worker.job_title}}</p>
+<p>skills:{{worker.skills}}</p>
+        
+    
+    
+    
+    <div class="ratings">
+        <h3>Ratings</h3>
+    </div>
+</div>
+<p>Your Available Reward Points: {{ user.userprofile.reward_points }}</p>
+
+<div class="feedback-section">
+  <h3>Feedback & Ratings</h3>
+{% if feedbacks %}
+  {% for feedback in feedbacks %}
+      <div class="feedback">
+        
+          <strong>{{ feedback.user.username }}</strong>
+          <p class="submitted-rating">
+            {% for i in "12345"|make_list %}
+                {% if forloop.counter <= feedback.rating %}
+                    <span class="filled-star">★</span>
+                {% else %}
+                    <span class="empty-star">☆</span>
+                {% endif %}
+            {% endfor %}
+        </p>
+        
+
+          <p>{{ feedback.comment }}</p>
+          <small>{{feedback.created_at|date:"d M Y,H:i"}}</small>
+      </div>
+      {% endfor %}
+{% else %}
+      <p>No feedback available.</p>
+{% endif %}
+</div>
+<div class="givefeedback">
+    {% if can_give_feedback %}
+        <h3>Give Feedback</h3>
+        <form method="post">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label>{{ form.rating.label }}</label>
+                <div class="rating-stars">
+                    {% for value, label in form.rating.field.choices %}
+                        <input type="radio" name="{{ form.rating.name }}" value="{{ value }}" id="star{{ value }}" 
+                            >
+                            <!-- {% if form.rating.value|stringformat:"s" == value|stringformat:"s" %}checked{% endif %} -->
+                        <label for="star{{ value }}" class="star">★</label>
+                    {% endfor %}
+                </div>
+                
+            </div>
+
+            <div class="form-group">
+                <label>{{ form.comment.label }}</label>
+                {{ form.comment }}
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit Feedback</button>
+        </form>
+    {% endif %}
+</div>
+
+
+</div>
+<script>
+    function toggleRewardInput(checkbox) {
+        const inputGroup = document.getElementById("reward_input_group");
+        if (checkbox.checked) {
+            inputGroup.style.display = "block";
+        } else {
+            inputGroup.style.display = "none";
+            document.getElementById("points_to_use").value = ''; 
+        }
+    }
+</script>
+
+
+{% endblock %}

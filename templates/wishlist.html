@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block links %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/worker_list.css' %}">
+{%endblock%}
+{%block contents%}
+
+<div class="container py-5" style="min-height: 50vh;">
+    
+    <h1 class="text-center mb-4">Favourites</h1>
+    <div class="row">
+    {%if not wishlists%}
+    <strong class="text-center mb-3">Your favorites are empty!</strong>
+    {%else%}  
+      {% for wishlist in wishlists %}
+      <div class="col-lg-4 col-md-6 col-sm-12 mb-4 d-flex">
+      
+          <div class="card h-100">
+
+            <img src="{{ wishlist.worker.profilepicture.url }}" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">{{ wishlist.worker.user.username }}</h5>
+              <p class="card-text">Job: {{wishlist.worker.job_title }}</p>
+              <p class="card-text">Skills: {{ wishlist.worker.skills }}</p>
+              <p class="card-text">Categories: 
+              {% for category in wishlist.worker.categories.all %}
+                {{ category.name }}{% if not forloop.last %}, {% endif %}
+              {%endfor%}
+              </p>
+              <div class="profileview">
+                 <a href="{% url 'workerdetails' wishlist.worker.id %}" class="btn btn-primary">View Profile</a>
+              </div>
+             
+            </div>
+          </div>
+      </div>
+      {% endfor%}  
+    </div>
+    {%endif%}
+    
+      
+    
+</div>
+
+{% endblock %}

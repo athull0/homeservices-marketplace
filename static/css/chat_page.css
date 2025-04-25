@@ -1,0 +1,133 @@
+.chat-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    padding-bottom: 120px; 
+}
+
+
+.chat-container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    /* margin: 30px auto; */
+    background: #f9f9f9;
+    /* border-radius: 10px; */
+    /* box-shadow: 0 4px 8px rgba(0,0,0,0.1); */
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    padding-bottom: 100px;
+    margin-bottom: 150px;
+    
+}
+
+/* #chat-box {
+    flex-grow: 1;
+    height: 400px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    padding: 10px;
+    background-color: white;
+    border-radius: 5px;
+    margin-bottom: 10px;
+} */
+
+
+.message {
+    margin: 5px 0;
+    padding: 8px 12px;
+    border-radius: 20px;
+    max-width: 75%;
+    display: inline-block;
+    clear: both;
+}
+
+/* .sent {
+    
+    background-color: #dcf8c6;
+    float: right;
+    text-align: right;
+}
+
+.received {
+    background-color: #eee;
+    float: left;
+    text-align: left;
+    
+} */
+
+.input-box {
+    display: flex;
+    gap: 10px;
+}
+
+.input-box input {
+    flex-grow: 1;
+    padding: 10px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+}
+
+.input-box button {
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+}
+
+h3 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+footer{
+    display: none;
+}
+.avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 10px;
+    object-fit: cover;
+    vertical-align: middle;
+}
+/* .chat-message {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+} */
+.chat-message-row {
+    display: flex;
+    margin: 5px 0;
+    align-items: center;
+}
+
+.chat-message-row.sent {
+    justify-content: flex-end;
+}
+
+.chat-message-row.received {
+    justify-content: flex-start;
+}
+
+.chat-message {
+    background-color: #dcf8c6;
+    padding: 10px;
+    border-radius: 15px;
+    max-width: 60%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    max-width: 60%;        
+    word-wrap: break-word; 
+    overflow-wrap: break-word;
+    word-break: break-word;       
+    overflow-wrap: break-word;    
+    white-space: normal; 
+}
+
+.chat-message-row.received .chat-message {
+    background-color: #eee;
+}
+

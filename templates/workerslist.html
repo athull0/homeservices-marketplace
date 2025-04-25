@@ -1,0 +1,40 @@
+{% extends 'dashboard.html' %}
+{% block links %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/userslist.css' %}">
+{% endblock %}
+
+{% block contents %}
+<h1>Workers</h1>
+<a href="{% url 'pendingworkers' %}"><h2>See Pending workers here</h2></a>
+<hr>
+<div class="users-container">
+    <div class="searchbar">
+        <form method="get" action="{% url 'search_workers_a' %}" class="form-inline my-2 my-lg-0 search-bar" style="display: flex; min-width:400px; width:100%;">
+        <input class=" mr-sm-2" type="text"  name="q" placeholder="Search Workers" value="{{search_query}}">
+        <button  type="submit"><span class="material-symbols-outlined">
+            search
+            </span></button>
+        </form>
+      </div>
+    {% for worker in workers %}
+    <div class="users">
+        <p>Name:{{worker.user.username}}</p>
+        <p>Job:{{worker.job_title}}</p>
+        <p>Categories:{{worker.Categories}}</p>
+        <p>id:{{worker.user.id}}</p>
+        
+        <div class="delete">
+            <a href="{% url 'workerdelete' worker.user.id %}"><button class="btn btn-danger">Remove</button></a>
+        </div>
+        
+    </div>
+    {% endfor %}
+</div>
+
+
+{% endblock %}
+
+
+
+

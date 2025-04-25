@@ -1,0 +1,99 @@
+<div class="modal fade" 
+         id="workersignupmodal" 
+         tabindex="-1" 
+         aria-hidden="true"
+         data-bs-backdrop="static" 
+         data-bs-keyboard="true">
+      
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Register</h5>
+            <button type="button" class="btn-close close-modal" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form method="post" action="{% url 'regworker' %}" id="wsignup-form">
+              {% csrf_token %}
+              <div class="alert alert-danger" style="display: none;"></div>
+              {% if form.errors %}
+                <div class="alert alert-danger">
+                  <ul>
+                    {% for field, errors in form.errors.items %}
+                      {% for error in errors %}
+                        <li>{{ error }}</li>
+                      {% endfor %}
+                    {% endfor %}
+                  </ul>
+                </div>
+              {% endif %}
+  
+              <div class="mb-3">
+                <label for="id_username" class="form-label">Username</label>
+                {{ form.username }}
+                <small class="text-danger">{{ form.username.errors|first }}</small>
+              </div>
+  
+              <div class="mb-3">
+                <label for="id_email" class="form-label">Email</label>
+                {{ form.email }}
+                <small class="text-danger">{{ form.email.errors|first }}</small>
+              </div>
+  
+              <div class="mb-3">
+                <label for="id_password1" class="form-label">Password</label>
+                {{ form.password1 }}
+                <small class="text-danger">{{ form.password1.errors|first }}</small>
+              </div>
+  
+              <div class="mb-3">
+                <label for="id_password2" class="form-label">Confirm Password</label>
+                {{ form.password2 }}
+                <small class="text-danger">{{ form.password2.errors|first }}</small>
+              </div>
+  
+              <button type="submit" class="btn btn-primary">Register</button>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary close-modal" data-bs-dismiss="modal">Close</button>
+            <p>Already Have An Account? <button class="btn btn-link p-0 switch-to-worker-login">Login</button>  </p>
+          </div>
+        </div>
+      </div>
+</div>
+
+
+<div class="modal fade" id="workerloginmodal" tabindex="-1" aria-hidden="true" data-bs-backdrop="static">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Login</h5>
+            <button type="button" class="btn-close close-modal" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form method="post" action="{% url 'loginw' %}" id="wlogin-form">
+              {% csrf_token %}
+              <div class="alert alert-danger" style="display: none;"></div>
+              {% if messages %}
+                {% for message in messages %}
+                  <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                {% endfor %}
+              {% endif %}
+    
+              <div class="mb-3">
+                <label class="form-label">Username</label>
+                <input type="text" class="form-control" name="user" required>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Password</label>
+                <input type="password" class="form-control" name="pass" required>
+              </div>
+              <button type="submit" class="btn btn-primary">Login</button>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <p>Don't have an account? <button type="button" class="btn btn-link p-0 switch-to-worker-register">Register</button></p>
+          </div>
+        </div>
+      </div>
+</div>

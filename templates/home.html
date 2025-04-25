@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+
+{% block links %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
+
+{% block contents %}
+<div class="main">
+    <div class="header">
+        {% if messages %}
+        <ul class="messages">
+         {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+        </ul>
+        {% endif %}
+        {% if user.is_authenticated %}
+        <h1 id="welcomemessage" style="font-size: 50px; font-weight:1000; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin-bottom:10px; color:rgb(127, 154, 209);">Welcome {{user.username}}</h1>
+        {%endif%}
+        <p style="font-size: 50px; font-weight:1000; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Professional Home Services,<br>Anytime,<br>Anywhere!<p>
+        <p style="font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; font-size: 20px; font-weight:400;;">Welcome to a complete solution for all your home related problems!</p>
+        
+        {% if not user.is_authenticated %}
+        <button class="btn btn-info loginnow" data-bs-toggle="modal" data-bs-target="#loginmodal">Login now</button>
+        {% endif %}
+    </div>
+    <div class="achievements">
+        <p>1000+<br>works done!</p>
+        <p>100+<br>workers</p>
+        <p>4.9<br>overall ratings</p>
+    </div>
+    <div class="category-container">
+      <div class="category">
+        <p class="categorytitle" style="font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif ;">What are you looking for?</p>
+        {% for i in cat %}
+        <a href="{% url 'workerslist' i.id%}" style="text-decoration: none; color:black;">
+         <div class="imagelink">
+            <img src="{{i.image.url}}">
+            <p>{{i.name}}</p>
+        </div>   
+        </a>
+        
+        
+
+       {% endfor %}
+        
+    </div>  
+    </div>
+    
+    <div class="features-container">
+        <div class="image-container">
+            <img src="{% static 'images/three.webp' %}" alt="Service Team">
+        </div>
+    
+        <div class="features">
+            <div class="fheading">
+                <h3>Why Should You Choose Us?</h3>
+            </div>
+            <div class="feature">
+                <span class="number">1</span>
+                <div class="feature-content">
+                    <h3>Exceptional Expertise</h3>
+                    <p>Our skilled professionals ensure top-quality home services tailored to your needs.</p>
+                </div>
+            </div>
+    
+            <div class="feature">
+                <span class="number">2</span>
+                <div class="feature-content">
+                    <h3>High-Quality Standards</h3>
+                    <p>We use industry-leading techniques and tools to maintain cleanliness and efficiency.</p>
+                </div>
+            </div>
+    
+            <div class="feature">
+                <span class="number">3</span>
+                <div class="feature-content">
+                    <h3>Customer-Centric Approach</h3>
+                    <p>Our services are designed with your convenience and satisfaction in mind.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+        
+    <div class="joinasworker">
+        <p style="font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; font-size: 30px; font-weight:900;">Join Our Home Services Network</p>
+        <p>Are you skilled in home services?Become a worker and connect with customers instantly!</p>
+        <a href="{% url 'regworker' %}"><button class="btn btn-primary btn-dark">Become A Worker</button></a>
+    </div>
+     <p  style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size: 30px; padding-top:20px; margin-top:20px;">Getting Our Services in Three easy steps</p>
+    <div class="steps">
+       
+        <div class="step1" style="display: flex; flex-direction:column; justify-content:center; align-items:center; gap:10px">
+            <img src="{% static 'images/Group 8.jpg' %}">
+            <p>Book Service Online</p>
+        </div>
+        <div class="step2" style="display: flex; flex-direction:column; justify-content:center; align-items:center; gap:10px">
+            <img src="{% static 'images/Group 9.jpg' %}" alt="">
+            <p>Wait till Completion</p>
+        </div>
+        <div class="step3" style="display: flex; flex-direction:column; justify-content:center; align-items:center; gap:10px">
+            <img src="{%static 'images/Group 10.jpg'  %}">
+            <p>Enjoy the Work</p>
+        </div>
+        
+    </div>
+</div>
+<script src="{% static 'js/home.js'%}"></script>
+{% endblock %}

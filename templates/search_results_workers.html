@@ -1,0 +1,30 @@
+{% extends 'dashboard.html' %}
+{% block links %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/userslist.css' %}">
+{% endblock %} 
+
+{% block contents %}
+<div class="users-container">
+    {% if workers %}
+
+        {% for worker in workers %}
+            <div class="users">
+       
+                <p>Name:{{worker.username}}</p>
+                <p>Address:{{worker.worker_profile.address}}</p>
+                <p>Job:{{worker.worker_profile.job_title}}</p>
+                <p>Contact:{{worker.worker_profile.contact}}</p>
+                <p>Id:{{worker.id}}</p>
+                <div class="delete">
+                    <a href="{% url 'workerdelete' worker.id %}"><button class="btn btn-danger">Remove</button></a>
+                </div>
+        
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No workers found matching the search.</p>
+    {% endif %} 
+</div>
+
+{% endblock %}

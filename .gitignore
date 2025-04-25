@@ -1,0 +1,16 @@
+# Python stuff
+*.pyc
+__pycache__/
+
+# Django database
+db.sqlite3
+
+# Secrets file (like API keys)
+.env
+
+# Static and media folders (optional)
+staticfiles/
+media/
+
+# Your virtual environment (only if it's inside the project folder)
+hsenv/
